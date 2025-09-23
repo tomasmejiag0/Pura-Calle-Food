@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "puracalle-food-nav-mobile",
-    "slug": "puracalle-food-nav-mobile",
+    "name": "Pura Calle Food",
+    "slug": "puracalle-food-nav",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

@@ -1,98 +1,186 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import React from 'react';
+import { View, Text, ScrollView, Image, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Flame, Star, MapPin } from 'lucide-react-native';
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
+    <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={styles.header}>
+          <View style={styles.headerContent}>
+            <Image 
+              source={require('@/assets/images/pura-calle-logo.png')} 
+              style={styles.logo}
+              resizeMode="contain"
             />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+            <Text style={styles.title}>¡Bienvenido! 🍔🔥</Text>
+            <Text style={styles.subtitle}>La mejor comida callejera de la ciudad</Text>
+          </View>
+        </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+        {/* Content */}
+        <View style={styles.content}>
+          {/* Featured Section */}
+          <View style={styles.featuredCard}>
+            <View style={styles.cardHeader}>
+              <Flame size={32} color="#ef4444" />
+              <Text style={styles.cardTitle}>¡Especialidad del día!</Text>
+            </View>
+            <Text style={styles.cardText}>
+              Prueba nuestras hamburguesas artesanales con ingredientes frescos y sabor único
+            </Text>
+            <View style={styles.specialOffer}>
+              <Text style={styles.offerText}>🍟 Combo Especial - $12.990</Text>
+            </View>
+          </View>
+
+          {/* Location Card */}
+          <View style={styles.card}>
+            <View style={styles.cardHeader}>
+              <MapPin size={24} color="#ef4444" />
+              <Text style={styles.cardSubtitle}>¿Dónde nos encontramos?</Text>
+            </View>
+            <Text style={styles.cardText}>
+              📍 Parque Central - Lunes a Domingo
+            </Text>
+            <Text style={styles.cardText}>
+              🕐 11:00 AM - 10:00 PM
+            </Text>
+          </View>
+
+          {/* Rating Card */}
+          <View style={styles.ratingCard}>
+            <View style={styles.ratingHeader}>
+              <Star size={24} color="#eab308" fill="#eab308" />
+              <Text style={styles.ratingScore}>4.9/5</Text>
+            </View>
+            <Text style={styles.ratingText}>⭐⭐⭐⭐⭐ "La mejor comida callejera que he probado!"</Text>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+    backgroundColor: '#fef2e7', // Orange-50 equivalent
+  },
+  header: {
+    backgroundColor: '#f97316', // Orange-500
+    paddingVertical: 24,
+    paddingHorizontal: 24,
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+  },
+  headerContent: {
+    alignItems: 'center',
+  },
+  logo: {
+    height: 80,
+    width: 120,
+    marginBottom: 8,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  subtitle: {
+    color: '#fed7aa', // Orange-200
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  content: {
+    padding: 24,
+    gap: 24,
+  },
+  featuredCard: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+    borderLeftWidth: 4,
+    borderLeftColor: '#f97316',
+  },
+  card: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  ratingCard: {
+    backgroundColor: '#fef3c7', // Yellow-100
+    borderRadius: 16,
+    padding: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  cardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    marginBottom: 16,
+  },
+  cardTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#1f2937', // Gray-800
+    flex: 1,
+  },
+  cardSubtitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#1f2937', // Gray-800
+    flex: 1,
+  },
+  cardText: {
+    color: '#6b7280', // Gray-600
+    fontSize: 16,
+    marginBottom: 8,
+    lineHeight: 22,
+  },
+  specialOffer: {
+    backgroundColor: '#fef2e7', // Orange-50
+    padding: 16,
+    borderRadius: 12,
+    marginTop: 8,
+  },
+  offerText: {
+    fontWeight: '600',
+    color: '#c2410c', // Orange-700
+    fontSize: 16,
+  },
+  ratingHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  ratingScore: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#1f2937', // Gray-800
+  },
+  ratingText: {
+    color: '#374151', // Gray-700
+    fontSize: 16,
+    lineHeight: 22,
   },
 });
